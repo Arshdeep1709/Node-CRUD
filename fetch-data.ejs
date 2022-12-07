@@ -1,0 +1,43 @@
+<!-- We will display or data here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- we want our data to be shown in table form so we will create a form -->
+         <h1><center>Data</center></h1>
+    <table border="5" width="100%">
+        <tr>
+            <th>Id.</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Contact</th>
+            <th>Action</th>
+        </tr>
+        <!-- Now we will use ejs formats -->
+        <!-- first we will see if there is any data or not -->
+
+       <% if (data.length > 0) { %>
+        <% for( let i= 0; i < data.length; i++ ) { %>
+            <tr>
+                <td><%- data[i].id %></td>
+                <td><%- data[i].name %></td>
+                <td><%- data[i].email %></td>
+                <td><%- data[i].contact %></td>
+                <td><a href="/delete?id=<%- data[i].id %>">Delete</a></td>
+            </tr>
+        
+        <% } %>
+        
+       <% } else { %>
+        <h1>Data not found !</h1>
+
+        <% } %>
+
+    </table>
+</body>
+</html>
