@@ -28,7 +28,9 @@
                 <td><%- data[i].name %></td>
                 <td><%- data[i].email %></td>
                 <td><%- data[i].contact %></td>
-                <td><a href="/delete?id=<%- data[i].id %>">Delete</a></td>
+                <td><a href="/delete?id=<%- data[i].id %>">Delete</a>
+                    <a href="/update?id=<%- data[i].id %>">Update</a>
+                </td>
             </tr>
         
         <% } %>

@@ -32,7 +32,7 @@ app.post("/submit", function(req,res){
     })
     
 })
-app.get("/fetch-data", (req,res)=>{
+app.get("/fetch-data", (req,res)=>{  // here we will be fetching our data by get method
 
     connection.connect(function(err){
         if(err) throw err
@@ -46,7 +46,7 @@ app.get("/fetch-data", (req,res)=>{
     })
 
 
-}) // here we will be fetching our data by get method
+}) 
 
 
 
@@ -61,6 +61,43 @@ app.get("/delete", (req,res)=>{
         connection.query(sql, [id], function(err, result){
             if(err) throw err
             res.redirect('/fetch-data')
+            
+        })
+    })
+
+})
+
+app.get("/update", (req,res)=>{
+
+    connection.connect(function(err){
+        if(err) throw err
+        let sql = "select * from form where id=?";
+
+        let id = req.query.id;
+        connection.query(sql, [id], function(err, result){
+            if(err) throw err
+            res.render(__dirname+"/update-data",{data:result})
+            
+        })
+    })
+
+})
+
+app.post("/update", (req,res)=>{
+
+    
+    let name = req.body.name
+    let email = req.body.email
+    let contact = req.body.contact
+    let id = req.body.id
+
+    connection.connect(function(err){
+        if(err) throw err
+        let sql = "UPDATE form set name = ?, email = ?, contact = ? where id = ?"
+        connection.query(sql, [name,email,contact,id], function(err, result){
+            if(err) throw err
+            res.redirect('/fetch-data')
+
             
         })
     })
